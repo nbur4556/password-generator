@@ -62,13 +62,15 @@ function buildUseableCharactersArray() {
 // Runs when 'Generate Password' button is pressed
 function generatePassword() {
   setPasswordOptions();
+  var generatedPassword = "";
   var useableCharacters = buildUseableCharactersArray();
-  console.log("CHARACTERS:", useableCharacters.length);
 
   for (let i = 0; i < passwordOptions.passwordLength; i++) {
     let rand = Math.floor(Math.random() * useableCharacters.length);
-    console.log(rand);
+    generatedPassword += useableCharacters[rand].toString();
   }
+
+  return generatedPassword;
 }
 
 // Write password to the #password input
