@@ -16,7 +16,7 @@ function setPasswordOptions() {
   passwordOptions.useUppercase = confirm("Use uppercase letters?");
   passwordOptions.useNumbers = confirm("Use numbers?");
   passwordOptions.useSpecialCharacters = confirm("Use special characters?");
-  passwordOptions.passwordLength = prompt("How long should the password be?")
+  passwordOptions.passwordLength = Number(prompt("How long should the password be?"));
 }
 
 // Returns an array of useable characters depending on options from passwordOptions
@@ -63,8 +63,12 @@ function buildUseableCharactersArray() {
 function generatePassword() {
   setPasswordOptions();
   var useableCharacters = buildUseableCharactersArray();
+  console.log("CHARACTERS:", useableCharacters.length);
 
-  console.log(useableCharacters);
+  for (let i = 0; i < passwordOptions.passwordLength; i++) {
+    let rand = Math.floor(Math.random() * useableCharacters.length);
+    console.log(rand);
+  }
 }
 
 // Write password to the #password input
