@@ -8,15 +8,30 @@ var passwordOptions = {
   useNumbers: true,
   useSpecialCharacters: true,
   passwordLength: 8
-}
+};
 
 // Gets input from user and sets requirements for password
 function setPasswordOptions() {
+  setCharacterOptions();
+  passwordOptions.passwordLength = Number(prompt("How long should the password be?"));
+
+  //Check that passwordOptions.passwordLength is a number between 8 and 128
+  while (passwordOptions.passwordLength < 8 || passwordOptions.passwordLength > 128 || passwordOptions.passwordLength == NaN) {
+    passwordOptions.passwordLength = prompt("The password length must be a number between 8 and 128. How long should the password be?");
+  }
+
+  //Check that at least one character type is selected
+  while (passwordOptions.useLowercase == false && passwordOptions.useUppercase == false && passwordOptions.useNumbers == false && passwordOptions.useSpecialCharacters == false) {
+    alert("You need at least one type of character to generate a password.");
+    setCharacterOptions();
+  }
+}
+
+function setCharacterOptions() {
   passwordOptions.useLowercase = confirm("Use lowercase letters?");
   passwordOptions.useUppercase = confirm("Use uppercase letters?");
   passwordOptions.useNumbers = confirm("Use numbers?");
   passwordOptions.useSpecialCharacters = confirm("Use special characters?");
-  passwordOptions.passwordLength = Number(prompt("How long should the password be?"));
 }
 
 // Returns an array of useable characters depending on options from passwordOptions
@@ -35,21 +50,25 @@ function buildUseableCharactersArray() {
     "_", "`", "{", "|", "}", "~"
   ]
 
+  // Adds lowercase letters to usable characters
   if (passwordOptions.useLowercase === true) {
     for (let i = 0; i < allLetters.length; i++) {
       useableCharacters.push(allLetters[i]);
     }
   }
+  // Adds uppercase letters to usable characters
   if (passwordOptions.useUppercase === true) {
     for (let i = 0; i < allLetters.length; i++) {
       useableCharacters.push(allLetters[i].toUpperCase());
     }
   }
+  // Adds numbers to usable characters
   if (passwordOptions.useNumbers === true) {
     for (let i = 0; i < 10; i++) {
       useableCharacters.push(0 + i);
     }
   }
+  // Adds special characters to usable characters
   if (passwordOptions.useSpecialCharacters === true) {
     for (let i = 0; i < allSpecialCharacters.length; i++) {
       useableCharacters.push(allSpecialCharacters[i]);
