@@ -13,17 +13,18 @@ var passwordOptions = {
 // Gets input from user and sets requirements for password
 function setPasswordOptions() {
   setCharacterOptions();
-  passwordOptions.passwordLength = Number(prompt("How long should the password be?"));
-
-  //Check that passwordOptions.passwordLength is a number between 8 and 128
-  while (passwordOptions.passwordLength < 8 || passwordOptions.passwordLength > 128 || passwordOptions.passwordLength == NaN) {
-    passwordOptions.passwordLength = prompt("The password length must be a number between 8 and 128. How long should the password be?");
-  }
 
   //Check that at least one character type is selected
   while (passwordOptions.useLowercase == false && passwordOptions.useUppercase == false && passwordOptions.useNumbers == false && passwordOptions.useSpecialCharacters == false) {
     alert("You need at least one type of character to generate a password.");
     setCharacterOptions();
+  }
+
+  passwordOptions.passwordLength = Number(prompt("How long should the password be?"));
+
+  //Check that passwordOptions.passwordLength is a number between 8 and 128
+  while (passwordOptions.passwordLength < 8 || passwordOptions.passwordLength > 128 || passwordOptions.passwordLength == NaN) {
+    passwordOptions.passwordLength = prompt("The password length must be a number between 8 and 128. How long should the password be?");
   }
 }
 
